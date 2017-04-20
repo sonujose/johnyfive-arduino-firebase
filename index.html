@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="App">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="favicon.png" />
+  <title>IOT Trash Status System</title>
+  <base href="/">
+</head>
+
+<body>
+  <div>
+    <div>
+      <h1>IOT Trash System</h1>
+    </div>
+    <div>
+      <h3>Trash Condition</h3>
+      <h3 id="trashStatus"></h3>
+    </div>
+  </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+<script>
+  var config = {
+    apiKey: "AIzaSyAfsIiLf2OhTWZvC-B61a0AfPS1SA-rZ3Y",
+    authDomain: "iot-trash-awsome.firebaseapp.com",
+    databaseURL: "https://iot-trash-awsome.firebaseio.com",
+    projectId: "iot-trash-awsome",
+    storageBucket: "iot-trash-awsome.appspot.com",
+    messagingSenderId: "187072088990"
+  };
+  firebase.initializeApp(config);
+  var statusDom = document.getElementById('trashStatus');
+  var dbRef = firebase.database().ref();
+  dbRef.on('value', function (snapshot) {
+    var statusVal = snapshot.val().trashStatus;
+    statusDom.innerText = statusVal;
+  });
+</script>
+
+</html>
